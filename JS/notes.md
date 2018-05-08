@@ -44,6 +44,21 @@ AJAX - XHR & Fetch
 AJAX - jQuery & Axios
  -->
  * $.ajax <!-- $.get/$.post/$.getJSON - shorthands -->
- * 
+ * jquery ajax doc <!-- https://github.com/jquery/jquery/blob/731c501155ef139f53029c0e58409b80f0af3a0c/src/ajax.js -->
+ * exercise jquery cat/dog api <!-- https://codepen.io/GeeL/pen/MGrKej?editors=0010 --> 
+
+ * axios - lightweight http request library - built on xhr <!-- jquery is big library for using ajax -->
+ * axios.get(url) .then() .catch() <!-- also post etc -->
+ * err.response, err.request, else <!-- differentiates errors -->
+
+ * ron swanson quote generator - xhr/fetch/jquery/axios <!-- https://codepen.io/GeeL/pen/MGrypG -->
+ <!-- https://codepen.io/Colt/pen/vJpMvj?editors=1010 -->
 
 
+
+
+<!-- 
+TESTING W/ JASMINE
+ -->
+
+ 
