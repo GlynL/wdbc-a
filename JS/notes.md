@@ -60,5 +60,31 @@ AJAX - jQuery & Axios
 <!-- 
 TESTING W/ JASMINE
  -->
+ * jasmine starter code <!-- https://codepen.io/eschoppik/pen/ZybNdo -->
 
- 
+
+* describe -> it -> expect
+* intro <!-- https://codepen.io/eschoppik/pen/jmgXXK -->
+* matchers - toBe/not.toBe, toBeCloseTo, toBeDefined, toBeTruthy/toBeFalsy, toBeGreaterThan/toBeLessThan, toContain, toEqual, jasmine.any()
+<!-- https://codepen.io/eschoppik/pen/zwgeRr -->
+* beforeEach/afterEach <!-- before/after each 'it' callback -->
+* beforeAll/afterAll <!-- all tests -->
+
+* spies
+* clocks
+* done
+* TDD <!-- test driven development --> - red -> green -> refactor
+* BDD  <!-- behaviour --> - not mutually exclusive of tdd
+
+* unit/integration/acceptance/stress testing
+
+
+<!-- 
+ADVANCED ARRAY METHODS
+ -->
+* forEach()
+* .map() <!-- creates and returns a new array -->
+* .filter() <!-- if the expression evaluates to true it will be added to new array -->
+* .some() <!-- if one value of array evaluates to true, true will be returned -->
+* .every() <!-- if all values of array evalute to true, true will be returned -->
+* .reduce(function(accumulator, nextValue, index, array), 10 <!-- optional accumulator initial val --> ) <!-- whatever is returned becomes the new value of accumulator -->
