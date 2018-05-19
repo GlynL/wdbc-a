@@ -88,3 +88,30 @@ ADVANCED ARRAY METHODS
 * .some() <!-- if one value of array evaluates to true, true will be returned -->
 * .every() <!-- if all values of array evalute to true, true will be returned -->
 * .reduce(function(accumulator, nextValue, index, array), 10 <!-- optional accumulator initial val --> ) <!-- whatever is returned becomes the new value of accumulator -->
+
+<!-- 
+CLOSURES & KEYWORD 'THIS'
+ -->
+* closure 
+  - inner function makes use of variables defined in outer function that's already returned
+  - only remembers variables used in inner function
+  - private variables 
+  - immutability <!-- can't change value - return copy of array with .slice() -->  
+
+ * debugger <!-- keyword that pauses execution in dev tools -->
+
+ * 'this'
+  - global rule <!-- ouside declared object (window) -inside function still window --> 
+  - 'strict mode' <!-- removes ability to do bad things -->
+  - implicit/object rule <!-- 'this' value is closest parent object -->
+  - explicit binding <!-- call/apply/bind - only used by functions -->
+    - call <!-- thisArg, a, b, ... invoked immediately -->
+    - apply <!-- thisArg, [a, b, ...] invoked immediaately -->
+    - bind <!-- thisArg, a, b, ... not invoked immediately - don't need to know all arguments when binding -->
+  - 'new' keyword <!--  -->
+
+  * setTimeout() <!-- method on window object - global 'this' -->
+
+    
+
+
