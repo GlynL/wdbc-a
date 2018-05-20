@@ -92,25 +92,48 @@ ADVANCED ARRAY METHODS
 <!-- 
 CLOSURES & KEYWORD 'THIS'
  -->
-* closure 
-  - inner function makes use of variables defined in outer function that's already returned
-  - only remembers variables used in inner function
-  - private variables 
-  - immutability <!-- can't change value - return copy of array with .slice() -->  
+# closure 
+  * inner function makes use of variables defined in outer function that's already returned
+  * only remembers variables used in inner function
+  * private variables 
+  * immutability <!-- can't change value - return copy of array with .slice() -->  
 
  * debugger <!-- keyword that pauses execution in dev tools -->
 
  * 'this'
-  - global rule <!-- ouside declared object (window) -inside function still window --> 
-  - 'strict mode' <!-- removes ability to do bad things -->
-  - implicit/object rule <!-- 'this' value is closest parent object -->
-  - explicit binding <!-- call/apply/bind - only used by functions -->
+  * global rule <!-- ouside declared object (window) -inside function still window --> 
+  * 'strict mode' <!-- removes ability to do bad things -->
+  * implicit/object rule <!-- 'this' value is closest parent object -->
+  * explicit binding <!-- call/apply/bind - only used by functions -->
     - call <!-- thisArg, a, b, ... invoked immediately -->
     - apply <!-- thisArg, [a, b, ...] invoked immediaately -->
     - bind <!-- thisArg, a, b, ... not invoked immediately - don't need to know all arguments when binding -->
-  - 'new' keyword <!--  -->
+  * 'new' keyword <!-- new object created - calls a function returns object -->
 
   * setTimeout() <!-- method on window object - global 'this' -->
+
+
+<!-- 
+OBJECT ORIENTED PROGRAMMING (OOP)
+ -->
+ * objects created from 'classes' are called 'instances'
+ * constructor functions <!-- used as blueprint -->
+ # 'new' 
+  - creates empty object
+  - sets 'this' to obj
+  - adds 'return this' to end of function
+  - adds property to obj. '__proto__' (dunder)
+* https://codepen.io/GeeL/pen/GdzKmp?editors=0010
+
+# Prototypes '__proto__'
+* .prototype <!-- all js functions have -->
+* __proto__ added to object when created w/ 'new' <!-- points to .prototype on constructor function -->
+* JS checks for method on object & then on ___proto__
+
+* prototypal inheritance  <!-- obj2 = obj1 - creates reference not copy -->
+* object.create(prototype) <!-- using 'new' adds unnecessary properties -->
+* resetting constructor property
+
 
     
 
