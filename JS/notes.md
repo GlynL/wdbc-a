@@ -134,7 +134,3 @@ OBJECT ORIENTED PROGRAMMING (OOP)
 * object.create(prototype) <!-- using 'new' adds unnecessary properties -->
 * resetting constructor property
 
-
-    
-
-
