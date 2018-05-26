@@ -134,3 +134,62 @@ OBJECT ORIENTED PROGRAMMING (OOP)
 * object.create(prototype) <!-- using 'new' adds unnecessary properties -->
 * resetting constructor property
 
+
+<!-- 
+ES 2015
+ -->
+
+# const
+* can still change value of arrays/objects
+
+# Let
+* block scoped <!-- var was function scoped -->
+* hoists but can't access value before the actual line <!-- TDZ - temporal dead zone -->
+
+# arrow functions 
+* should never be used as methods on objects <!-- need the 'this' binding to the object -->
+
+# for...of
+* can't access index
+* used on structures with a Symbol.iterator method implemented <!-- not objects -->
+
+# Rest (...)
+* inside function arguments
+*  (a,b, ...c) <!-- contains all or all the remaining arguments -->
+
+# Spread (...)
+* outside function arguments
+
+# Object stuff
+* key & value same name - only write one 
+* Object methods <!-- jsut write a funciton without key/: -->
+* computed property names <!-- include a [property] durnig declartion -->
+
+* object destructuring 
+* array destructuring
+
+* static class methods 
+* extends <!-- has all the methods from the class extending form -->
+* super <!-- pass down methods/properties from parent class to child - have to match -->
+* maps <!-- like hash map/hash  -->
+  - any data type 
+  - iterating easy
+* weakmap <!-- all keys must be objects -->
+* sets
+  - all values are unique
+  - any data type
+  - weakset
+* promises <!-- resolve/reject - then/catch -->
+  - promise.all <!-- array of promises - if one is rejecte all fail -->
+* generators* <!-- pause/resume funciton executions -->
+  - create using *
+  - when invoked - generator object returned w/ keys value & done
+  - yield - instead of return <!-- can call multiple times with gen.next() -->
+  - iterate w/ for...of
+* Object.assign <!-- not a deep clone. similar to Object.create - assign more flexible -->
+* Array.from <!-- like [...arr] but has extra optional arg -->
+* arr.find() <!-- callback like forEach - returns either value found or undefined -->
+* arr.findIndex() <!-- same but retursn index  or -1 -->
+* arr.includes() <!-- alternative to .indexOf() -->
+* Number.isFinite() <!-- check if its a Number -->
+
