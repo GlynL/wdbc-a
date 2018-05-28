@@ -171,6 +171,8 @@ ES 2015
 * static class methods 
 * extends <!-- has all the methods from the class extending form -->
 * super <!-- pass down methods/properties from parent class to child - have to match -->
+
+
 * maps <!-- like hash map/hash  -->
   - any data type 
   - iterating easy
@@ -193,3 +195,13 @@ ES 2015
 * arr.includes() <!-- alternative to .indexOf() -->
 * Number.isFinite() <!-- check if its a Number -->
 
+<!-- 
+ES2016 & 2017
+ -->
+ * exponentiation operator <!-- ** - power--> 
+ * arr.includes()
+
+ * padStart/padEnd <!-- padding string to certain length -->
+
+ * async <!-- function returns a promise -->
+ * await <!-- pause function while doing something and then continue -->
