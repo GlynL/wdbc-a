@@ -203,5 +203,14 @@ ES2016 & 2017
 
  * padStart/padEnd <!-- padding string to certain length -->
 
+# async/await
  * async <!-- function returns a promise -->
  * await <!-- pause function while doing something and then continue -->
+* handling errors
+  - await inside try block
+  - catch(errr) block
+* multiple awaits <!-- run sequenctially/synchronous - get around it with saving in vars or await Promise.all -->
+
+* object rest <!-- ...key - similar to Object.assign-->
+
+
