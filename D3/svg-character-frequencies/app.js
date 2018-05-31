@@ -29,7 +29,6 @@ form.on("submit", function() {
     .selectAll("rect")
     .data(letters, d => d.letter)
       .attr('fill', 'black')
-    // .classed("new", false);
 
   // * exit and remove
   letterItems.exit().remove();
@@ -46,6 +45,24 @@ form.on("submit", function() {
       .attr('height', d => d.count * 10)
       .attr('y', d => height - d.count *10)
       .attr('x', (d,i) => 30 * i)
+
+  var text = d3
+    .select('svg')
+    .selectAll('text')
+    .data(letters, d => d.letter)
+    
+  text.exit().remove();
+
+  text
+    .enter()
+    .append('text')
+
+    .merge(text)
+      .attr('x', (d,i) => 30 * i + 12.5)
+      .attr('y', d => height - d.count * 10 - 10)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 30)
+      .text(d => d.letter)
 
 
   d3
