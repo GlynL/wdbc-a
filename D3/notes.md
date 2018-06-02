@@ -103,3 +103,40 @@ SVG
 
 * https://codepen.io/GeeL/pen/wXBMYM
 * https://codepen.io/GeeL/pen/PawNQp?editors=1100
+
+<!--
+Intermediate
+ -->
+
+# extrema
+
+* d3.max(dataArr, optionalCallback) <!--  callback helpful if array of objects and want to find max based on key -->
+* d3.min()
+* d3.extent(dataArr, optionalCallback) <!-- returns min & Max in array -->
+
+# scales
+
+* d3.scaleLinear() <!-- most common -->
+  .domain([num1, num2]) <!-- your range of numbers e.g. heights between 100cm & 190cm -->
+  .range([num3, num4]) <!-- space for mapping your range of numbers e.g. 0 to 500 - range can also be colours -->
+* can flip y axis
+
+# scatterplots
+
+# Axes & Gridlines
+
+* d3.axisTop(scale) <!-- also right/bottom/left -->
+* axis.tickSize(size) <!-- set tick size -->
+* axis.tickSizeOuter(0) <!-- border -->
+* style lines in css - stroke/stroke-dasharray <!-- .tick class added by d3 -->
+* rotating text changes x/y axes around
+
+# Histograms
+
+* d3.histogram() <!-- returns function -->
+  * pass dataset into return funciton & d3 gives us bins
+* histogram.value() <!-- what value used when creating bins -->
+* histogram.domain() <!-- min/max for bins - array -->
+* histogram.thresholds() <!-- can pass it an array - endpoints for each bin - if a number d3 will try to make that many bins -->
+  * xScale.ticks()
+* rangeRound() <!-- only whole numbers -->
