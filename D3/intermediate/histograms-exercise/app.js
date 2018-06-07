@@ -12,16 +12,16 @@ let ageData = regionData /* .map(d => d.medianAge). */
 
 const xScale = d3
   .scaleLinear()
-  .domain([0, d3.max(ageData, d => d.medianAge)])
-  .range([padding, width - padding]);
+  .domain(d3.extent(ageData, d => d.medianAge))
+  .rangeRound([padding, width - padding]);
 
-const histogram = d3
+let histogram = d3
   .histogram()
   .domain(xScale.domain())
-  .thresholds(xScale.ticks())
+  .thresholds(16)
   .value(d => d.medianAge);
 
-const bins = histogram(ageData);
+let bins = histogram(ageData);
 
 const yScale = d3
   .scaleLinear()
@@ -37,10 +37,6 @@ let bars = svg
   .selectAll(".bar")
   .data(bins)
   .enter()
-  .append("g")
-  .classed("bar", true);
-
-bars
   .append("rect")
   .attr("x", d => xScale(d.x0))
   // .attr("x", (d, i) => (barWidth + barPadding) * i)
@@ -55,13 +51,15 @@ svg
   .append("g")
   .attr("transform", `translate(0, ${height - padding})`)
   // .attr("dy", "-2em") /* not working - not sure */
+  .classed("x-axis", true)
   .call(xAxis);
 
-const yAxis = d3.axisLeft(yScale);
+let yAxis = d3.axisLeft(yScale);
 
 svg
   .append("g")
   .attr("transform", `translate(${padding}, 0)`)
+  .classed("y-axis", true)
   .call(yAxis);
 
 svg
@@ -82,3 +80,27 @@ svg
   .style("text-anchor", "middle")
   .style("font-size", "1.3em")
   .text("Frequency");
+
+const input = d3.select("input");
+
+input.on("input", () => {
+  const thresholds = Number(d3.event.target.value);
+  histogram.thresholds(thresholds);
+  yScale.domain([0, d3.max(bins, d => d.length)]);
+  d3.select(".y-axis").call(yAxis);
+  bins = histogram(ageData);
+
+  let bars = svg.selectAll("rect").data(bins);
+  bars.exit().remove();
+
+  let g = bars
+    .enter()
+    .append("rect")
+    .merge(bars)
+    .attr("x", d => xScale(d.x0))
+    // .attr("x", (d, i) => (barWidth + barPadding) * i)
+    .attr("y", d => yScale(d.length) - padding)
+    .attr("height", d => height - yScale(d.length))
+    .attr("width", d => xScale(d.x1) - xScale(d.x0) - barPadding)
+    .attr("fill", "blue");
+});

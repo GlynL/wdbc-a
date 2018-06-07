@@ -1,0 +1,13 @@
+svg {
+  margin: 0 auto;
+  display: block;
+}
+
+.arc {
+  stroke: black;
+}
+
+input {
+  margin: 0 auto;
+  display: block;
+}

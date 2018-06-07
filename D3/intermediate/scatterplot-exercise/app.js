@@ -8,6 +8,12 @@ const width = 800;
 const height = 800;
 const padding = 40;
 
+// tooltip
+const tooltip = d3
+  .select("body")
+  .append("div")
+  .classed("tooltip", true);
+
 regionData = regionData.filter(obj => {
   const keys = [
     "adultLiteracyRate",
@@ -52,23 +58,20 @@ const radiusScale = d3
   .range([2, 10]);
 
 // y axis
-d3
-  .select("svg")
+d3.select("svg")
   .append("g")
   .attr("transform", `translate(${padding}, 0)`)
   .call(yAxis);
 
 // x axis
-d3
-  .select("svg")
+d3.select("svg")
   .append("g")
   .attr("transform", `translate(0, ${height - padding})`)
   .attr("dy", "-2em")
   .call(xAxis);
 
 // graph data
-d3
-  .select("svg")
+d3.select("svg")
   .attr("height", height)
   .attr("width", width)
   .selectAll("circle")
@@ -78,11 +81,14 @@ d3
   .attr("cx", d => xScale(d.adultLiteracyRate))
   .attr("cy", d => yScale(d.subscribersPer100))
   .attr("r", d => radiusScale(d.medianAge))
-  .style("fill", d => colorScale(d.growthRate));
+  .style("fill", d => colorScale(d.growthRate))
+  .on("mouseover", showTooltip)
+  .on("touchstart", showTooltip)
+  .on("mouseout", hideTooltip)
+  .on("touchend", hideTooltip);
 
 // text
-d3
-  .select("svg")
+d3.select("svg")
   .append("text")
   .attr("x", width / 2)
   .attr("y", height - padding)
@@ -91,8 +97,7 @@ d3
   .style("font-size", "1.2em")
   .text("Adult Literacy Rate");
 
-d3
-  .select("svg")
+d3.select("svg")
   .append("text")
   .attr("transform", "rotate(-90)")
   .attr("x", -height / 2)
@@ -102,8 +107,7 @@ d3
   .style("font-size", "1.2em")
   .text("Subscribers / 100");
 
-d3
-  .select("svg")
+d3.select("svg")
   .append("text")
   .attr("x", width / 2)
   .attr("y", padding)
@@ -111,3 +115,20 @@ d3
   .style("text-anchor", "middle")
   .style("font-size", "1.7em")
   .text("Regional Literacy");
+
+function showTooltip(d) {
+  tooltip
+    .style("opacity", 1)
+    .style("left", `${d3.event.pageX}px`)
+    .style("top", `${d3.event.pageY}px`).html(`
+        <ul>
+          <li>${d.region}</li>
+          <li>${d.subscribersPer100}</li>
+          <li>${d.adultLiteracyRate}</li>
+        </ul>
+      `);
+}
+
+function hideTooltip() {
+  tooltip.style("opacity", 0);
+}

@@ -53,8 +53,7 @@ bars
   .attr("x", 10 - height)
   .style("alignment-baselin", "middle");
 
-d3
-  .select("input")
+d3.select("input")
   .property("min", minYear)
   .property("max", maxYear)
   .property("value", minYear)
@@ -80,8 +79,7 @@ d3
     g.append("rect");
     g.append("text");
 
-    g
-      .merge(bars)
+    g.merge(bars)
       .select("rect")
       .attr("x", d => xScale(d.x0))
       .attr("y", d => yScale(d.length))
@@ -92,12 +90,11 @@ d3
       })
       .attr("fill", "#9c27b0");
 
-    g
-      .merge(bars)
+    g.merge(bars)
       .select("text")
       .text(d => `${d.x0} - ${d.x1} (bar height: ${d.length})`)
       .attr("transform", "rotate(-90)")
       .attr("y", d => (xScale(d.x1) + xScale(d.x0)) / 2)
       .attr("x", 10 - height)
-      .style("alignment-baselin", "middle");
+      .style("alignment-baseline", "middle");
   });

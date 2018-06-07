@@ -4,6 +4,12 @@ const padding = 40;
 // const yMax = d3.max(birthData2011, d => d.lifeExpectancy);
 // const yMin = d3.min(birthData2011, d => d.lifeExpectancy);
 
+// tooltip
+const tooltip = d3
+  .select("body")
+  .append("div")
+  .classed("tooltip", true);
+
 const yScale = d3
   .scaleLinear()
   .domain(d3.extent(birthData2011, d => d.lifeExpectancy))
@@ -34,20 +40,17 @@ const radiusScale = d3
   .range([2, 40]);
 
 // x axis
-d3
-  .select("svg")
+d3.select("svg")
   .append("g")
   .attr("transform", `translate(0,${height - padding})`)
   .call(xAxis);
 
-d3
-  .select("svg")
+d3.select("svg")
   .append("g")
   .attr("transform", `translate(${padding}, 0)`)
   .call(yAxis);
 
-d3
-  .select("svg")
+d3.select("svg")
   .attr("width", width)
   .attr("height", height)
   .selectAll("circle")
@@ -57,10 +60,13 @@ d3
   .attr("cx", d => xScale(d.births / d.population))
   .attr("cy", d => yScale(d.lifeExpectancy))
   .attr("fill", d => colorScale(d.population / d.area))
-  .attr("r", d => radiusScale(d.births));
+  .attr("r", d => radiusScale(d.births))
+  .on("mousemove", showTooltip)
+  .on("touchstart", showTooltip)
+  .on("mouseout", hideTooltip)
+  .on("touchend", hideTooltip);
 
-d3
-  .select("svg")
+d3.select("svg")
   .append("text")
   .attr("x", width / 2)
   .attr("y", height - padding)
@@ -68,8 +74,7 @@ d3
   .style("text-anchor", "middle")
   .text("Births per Capita");
 
-d3
-  .select("svg")
+d3.select("svg")
   .append("text")
   .attr("x", width / 2)
   .attr("y", padding)
@@ -77,8 +82,7 @@ d3
   .style("font-size", "1.5em")
   .text("Data on Births by Country in 2011");
 
-d3
-  .select("svg")
+d3.select("svg")
   .append("text")
   // rotating changes x/y
   .attr("transform", "rotate(-90)")
@@ -87,3 +91,23 @@ d3
   .attr("dy", "-1.5em")
   .style("text-anchor", "middle")
   .text("Life Expectancy");
+
+function showTooltip(d) {
+  tooltip
+    .style("opacity", 1)
+    .html(
+      `
+      <ul class='tooltip__list'>
+        <li>${d.region}</li>
+        <li>${d.births.toLocaleString()}</li>
+        <li>${d.population.toLocaleString()}</li>
+      </ul>
+      `
+    )
+    .style("left", `${d3.event.pageX}px`)
+    .style("top", `${d3.event.pageY}px`);
+}
+
+function hideTooltip() {
+  tooltip.style("opacity", 0);
+}
