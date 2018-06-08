@@ -8,26 +8,38 @@ function fetchData() {
   d3.csv(
     "./UNdata_Export_20180607_111125883.csv",
     function(row) {
-      // if (row.Value === null) return;
+      const parseTime = d3.timeParse('%Y');
       return {
         country: row["Country or Area"],
-        year: Number(row.Year),
+        year: parseTime(row.Year),
         GDP: Number(row.Value)
       };
     },
 
     function(err, data) {
       if (err) throw err;
-      drawGraph(data);
+      let allData = { allData: data };
+
+      allData.countries = data.reduce((acc, currVal) => {
+        return (acc.includes(currVal.country)) ? acc : [...acc, currVal.country];
+      }, []);
+
+      allData.country = 'Australia';
+      allData.data = data.filter(item => item.country === allData.country)
+      drawGraph(allData);
     });
 }
 
-function drawGraph(data) {
-  const height = 800;
-  const width = 600;
+function drawGraph( { data, countries, country, allData } ) {
+  const height = 600;
+  const width = 800;
   const padding = 50;
+  const barWidth = (width - padding * 2) / data.length;
   const minYear = d3.min(data, d => d.year)
-  const maxYear = d3.max(data, d => d.year)
+  //  should be refactored
+  const formatTime = d3.timeFormat('%Y');
+  const parseTime = d3.timeParse('%Y');
+  const maxYear = parseTime(Number(formatTime(d3.max(data, d => d.year))) + 1)
 
   const svg = d3
     .select("svg")
@@ -35,12 +47,13 @@ function drawGraph(data) {
       .attr("width", width);
 
   svg.append('text')
-  .text(`Country GDP for Year ${minYear}`)
+  .text(`Yearly GDP for ${country}`)
   .attr('x', width/2)
   .attr('text-anchor', 'middle')
-  .attr('y', '1em');
+  .attr('y', '1em')
+  .classed('title', true);
 
-  const xScale = d3.scaleLinear()
+  const xScale = d3.scaleTime()
                     .domain([minYear, maxYear])
                     .range([padding, width - padding]);
 
@@ -49,14 +62,60 @@ function drawGraph(data) {
                     .range([height - padding, padding]);
 
   const xAxis = d3.axisBottom(xScale);
+  
   const yAxis = d3.axisLeft(yScale);
 
   svg.append('g')
       .attr('transform', `translate(0, ${height-padding})`)
+      .classed('x-axis', true)
       .call(xAxis);
 
   svg.append('g')
       .attr('transform', `translate(${padding}, 0)`)
+      .classed("y-axis", true)
       .call(yAxis);
+
+  const input = d3.select('#input')
+                  .property('value', country)
+                  .on('input', () => {
+                    if (countries.includes(d3.event.target.value)) {
+                      countryData = allData.filter(item => item.country === d3.event.target.value);
+                      yScale.domain(d3.extent(countryData, d => d.GDP));
+                      d3.select(".y-axis").call(yAxis);
+                      d3.select('.title')
+                        .text(`Yearly GDP for ${d3.event.target.value}`);
+
+                      plotData(countryData);
+                    }
+                  });
+                  
+  let countriesList = d3
+    .select('#countries');
+
+  countries.forEach(country => {
+    countriesList
+      .append('option')
+        .attr('value', country)
+  });
+
+
+  plotData(data);
+
+  function plotData(data) {
+    let bars = svg.selectAll('rect')
+                  .data(data);
+    bars
+      .exit()
+      .remove();
+    bars
+      .enter()
+      .append('rect')
+      .merge(bars)
+      .attr('x', d => xScale(d.year))
+      .attr('y', d => yScale(d.GDP))
+      .attr('width', barWidth)
+      .attr('height', d => height - padding - yScale(d.GDP));
+  }
 }
-  
+
+
