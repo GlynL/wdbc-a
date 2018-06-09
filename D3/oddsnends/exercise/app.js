@@ -110,19 +110,24 @@ function drawGraph( { data, countries, country, allData } ) {
                   .data(data);
     bars
       .exit()
+      .transition()
+      .duration(2000)
+      .attr('y', height - padding)
+      .attr('height', 0)
       .remove();
     bars
       .enter()
       .append('rect')
+      .attr('y', height - padding)
+
       .merge(bars)
       .attr('width', barWidth)
       .attr('x', d => xScale  (d.year))
-      .on('mousemove', showTooltip)
-      .on('touchstart', showTooltip)
-      .on('mouseout', hideTooltip)
-      .on('touchend', hideTooltip)
+      .on('mousemove touchstart', showTooltip)
+      .on('mouseout touchend', hideTooltip)
       
       .transition()
+      .duration(2000)
       .attr('y', d => yScale(d.GDP))  
       .attr('height', d => height - padding - yScale(d.GDP))
 
