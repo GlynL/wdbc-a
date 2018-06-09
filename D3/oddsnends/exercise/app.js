@@ -111,10 +111,12 @@ function drawGraph( { data, countries, country, allData } ) {
       .enter()
       .append('rect')
       .merge(bars)
-      .attr('x', d => xScale(d.year))
-      .attr('y', d => yScale(d.GDP))
       .attr('width', barWidth)
-      .attr('height', d => height - padding - yScale(d.GDP));
+      .attr('x', d => xScale  (d.year))
+      .transition()
+      .attr('y', d => yScale(d.GDP))  
+      .attr('height', d => height - padding - yScale(d.GDP))
+
   }
 }
 
