@@ -7,3 +7,29 @@ input {
   display: block;
   margin: 0 auto;
 }
+
+.tooltip {
+  position: absolute;
+  opacity: 0;
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #ccc;
+  pointer-events: none;
+  transform: translate(-50%, 30px)
+}
+
+.tooltip__list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tooltip:before {
+  border: 10px solid transparent;
+  border-bottom-color: #333;
+  content: ' ';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}

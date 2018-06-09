@@ -41,6 +41,11 @@ function drawGraph( { data, countries, country, allData } ) {
   const parseTime = d3.timeParse('%Y');
   const maxYear = parseTime(Number(formatTime(d3.max(data, d => d.year))) + 1)
 
+  // tooltip
+  let tooltip = d3.select('body')
+    .append('div')
+    .classed('tooltip', true);
+
   const svg = d3
     .select("svg")
       .attr("height", height)
@@ -75,6 +80,7 @@ function drawGraph( { data, countries, country, allData } ) {
       .classed("y-axis", true)
       .call(yAxis);
 
+
   const input = d3.select('#input')
                   .property('value', country)
                   .on('input', () => {
@@ -84,7 +90,6 @@ function drawGraph( { data, countries, country, allData } ) {
                       d3.select(".y-axis").call(yAxis);
                       d3.select('.title')
                         .text(`Yearly GDP for ${d3.event.target.value}`);
-
                       plotData(countryData);
                     }
                   });
@@ -97,7 +102,6 @@ function drawGraph( { data, countries, country, allData } ) {
       .append('option')
         .attr('value', country)
   });
-
 
   plotData(data);
 
@@ -113,10 +117,31 @@ function drawGraph( { data, countries, country, allData } ) {
       .merge(bars)
       .attr('width', barWidth)
       .attr('x', d => xScale  (d.year))
+      .on('mousemove', showTooltip)
+      .on('touchstart', showTooltip)
+      .on('mouseout', hideTooltip)
+      .on('touchend', hideTooltip)
+      
       .transition()
       .attr('y', d => yScale(d.GDP))  
       .attr('height', d => height - padding - yScale(d.GDP))
 
+    function showTooltip(d) {
+      tooltip
+        .style('opacity', 1)
+        .style('top', d3.event.pageY + 'px')
+        .style('left', d3.event.pageX + 'px')
+        .html(`
+          <ul class='tooltip__list'>
+            <li>${d.year.getFullYear()}</li>
+            <li>${d.GDP.toLocaleString('en', {maximumFractionDigits: 2})}</li>
+          </ul>
+        `)
+    }
+
+    function hideTooltip() {
+      tooltip.style('opacity', 0);
+    }
   }
 }
 
