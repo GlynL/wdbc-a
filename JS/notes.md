@@ -16,7 +16,12 @@ ASYNC FOUNDATIONS
 
 
 <!-- Promises -->
-* var p1 = new Promise(function(resolve, reject))
+* var p1 = new Promise(function(resolve, reject){
+  if(something) resolve('yes!')
+  else reject('no!')
+})
+* .then(value => { value = 'yes!'<!-- resolve value -->})
+  .catch(err => { err = 'no!' <!-- reject value -->})
 
 
 <!-- 
