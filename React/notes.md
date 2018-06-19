@@ -24,6 +24,18 @@ randomly select hobby & remove after 5 secs
  * state relies on prev state <!-- setState((prevstate, props) => counter: prevState.counter + 1) -->
  * state is asynchronous - can't console log after-  use a callback <!-- setState({ state }, callback) -->
 
+<!-- react 16 -->
+* error boundary
+* can return array of elements <!-- don't need wrapper div -->
+* fiber
+
+* form - onSubmit event not an onClick w/ button
+
+# refs <!-- uncommon -->
+* managing focus, text selection, or media playback
+* triggering imperative animations
+* integarting with 3rd party DOM libraries
+
 
 
  # shallow/deep copies 
