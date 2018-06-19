@@ -1,0 +1,13 @@
+.guess-form {
+  display: flex;
+  margin: 30px 0;
+}
+
+.guess-form__label {
+  margin-right: 15px;
+}
+
+.guess-result {
+  display: flex;
+  align-items: center;
+}

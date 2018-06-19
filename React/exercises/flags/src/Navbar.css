@@ -1,0 +1,10 @@
+.banner {
+  height: 80px;
+  background-color: navy;
+  display: flex;
+  justify-content: center;
+}
+
+.banner__title {
+  color: white;
+}

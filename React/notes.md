@@ -15,12 +15,6 @@
 
 * pure function <!-- no side effects/does not modify inputs - can be repeated w/ same input/output  -->
 
-<!-- 
-randomly select instructor
-randomly select hobby & remove after 5 secs
-  - set timeout on constructor
- -->
-
  * state relies on prev state <!-- setState((prevstate, props) => counter: prevState.counter + 1) -->
  * state is asynchronous - can't console log after-  use a callback <!-- setState({ state }, callback) -->
 
