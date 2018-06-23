@@ -32,6 +32,54 @@
 
 
 
+# React-Router - v4
+* history.back(), history.forward(), history.pushState({}, 'title', '/newpage') <!-- doesn't make a GET request -->
+* BrowserRouter - more common <!-- uses history object - requires serverside support --> 
+* HashRouter <!-- doesn't use history object - changes # after url - doesn't require serverside support -->
+
+* wrap app in Router
+* Switch statement for components rendering under difif routs
+* Link for links to 'pages'
+* NavLink <!-- has active link -->
+
+* route props
+  - match <!-- how path matches current url -->
+  - location <!-- where you are now -->
+  - history <!-- similar to html5 history object -->
+* withRouter <!-- using route props outside route componetn  -->
+* render or component <!-- render to pass custom props  -->
+
+# REDUX
+* redux & react-redux packages
+* dispatch(action)
+* reducer(currentState, action)
+* new state
+* invoke listeners
+
+* Provider store = { store} <!-- wrap top level component> -->
+* presentational component <!-- primarily just visual -->
+* container component <!-- stateful component (app data) -->
+* combineReducers 
+* action creators
+* actions/components/containers/reducers <!-- folders -->
+
+* createStore(reducer) <!-- reducer tells store how to make changes to data in store -->
+* rootReducer(state<!-- = initialState -->, action) <!-- return state -->
+* store.getState() <!-- get state -->
+* store.dispatch(action) <!-- make changes to state -->
+* action is an object <!-- must have a type property -->
+* action creators <!-- function that returns an object - don't have to hardcode objects  -->
+
+* Provider <!-- connect react to redux -->
+* connect()(Component) <!-- connect component to redux -->
+
+* https://github.com/zalmoxisus/redux-devtools-extension
+
+
+
+
+
+
  # shallow/deep copies 
  I went down a lil rabbit hole w/ copies so I'll share what I learnt related to this.
 
