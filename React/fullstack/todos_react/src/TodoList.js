@@ -34,12 +34,11 @@ class TodoList extends Component {
 
   async toggleTodo(todo) {
     const updatedTodo = await apiCalls.toggleTodo(todo);
-    const todos = this.state.todos.map(
-      item =>
-        item._id === updatedTodo._id
-          ? { ...item, completed: !item.completed }
-          : item
-    );
+    const todos = this.state.todos.map(item => {
+      return item._id === updatedTodo._id
+        ? { ...item, completed: !item.completed }
+        : item;
+    });
     this.setState({ todos });
   }
 

@@ -38,7 +38,7 @@ export function deleteTodo(id) {
 
 export function toggleTodo(todo) {
   const updateUrl = `${API_URL}${todo._id}`;
-  fetch(updateUrl, {
+  return fetch(updateUrl, {
     method: "PUT",
     headers: new Headers({
       "Content-Type": "application/json"

@@ -71,12 +71,14 @@
 * action creators <!-- function that returns an object - don't have to hardcode objects  -->
 
 * Provider <!-- connect react to redux -->
-* connect()(Component) <!-- connect component to redux -->
+* connect(mapStateToProps, mapDispatchToProps)(Component) <!-- connect component to redux -->
+  - mapDispatchToProps <!-- import actioncreators and pass as object, don't write a function -->
+* mapStateToProps(reduxState) <!-- return an object -->
 
 * https://github.com/zalmoxisus/redux-devtools-extension
 
-
-
+# React-Router w/ Redux
+* BrowserRouter inside Provider
 
 
 
