@@ -1,13 +1,45 @@
 const db = require("../models/index");
 const jwt = require("jsonwebtoken");
 
-exports.signin = function() {};
+exports.signin = async function(req, res, next) {
+  try {
+    const user = await db.User.findOne({
+      email: req.body.email
+    });
+    const { id, username, profileImageUrl } = user;
+    const isMatch = await user.comparePassword(req.body.password);
+    if (isMatch) {
+      const token = jwt.sign(
+        {
+          id,
+          username,
+          profileImageUrl
+        },
+        process.env.SECRET_KEY
+      );
+
+      return res.status(200).json({
+        id,
+        username,
+        profileImageUrl,
+        token
+      });
+    } else {
+      return next({
+        status: 400,
+        message: "Invalid Email/Password."
+      });
+    }
+  } catch (err) {
+    next({ status: 400, message: "Invalid Email/Password." });
+  }
+};
 
 exports.signup = async function(req, res, next) {
   try {
     const user = await db.User.create(req.body);
     const { id, username, profileImageUrl } = user;
-    let token = jwt.sign(
+    const token = jwt.sign(
       {
         id,
         username,
