@@ -1,7 +1,7 @@
 function errorHandler(error, request, response, next) {
   return response.status(error.status || 500).json({
     error: {
-      mesage: error.message || "Oops! Somethign went wrong."
+      message: error.message || "Oops! Somethign went wrong."
     }
   });
 }
